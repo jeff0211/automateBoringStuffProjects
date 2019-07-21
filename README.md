@@ -1,0 +1,2 @@
+# automateBoringStuffProjects
+Practice Projects Solutions
