@@ -10,6 +10,7 @@ with open(r'Chapter_8/myMadLib/madLibText.txt') as madLibFile:
         elif each == 'NOUN' or each == 'VERB':
             userinput = input('Enter a ' + each + ' :\n')
         madLib = regex_terms.sub(userinput, madLib, 1)
+    print(madLib)
 
 with open(r'Chapter_8/myMadLib/newMadLib.txt', 'w') as newMadLibFile:
     newMadLibFile.write(madLib)
