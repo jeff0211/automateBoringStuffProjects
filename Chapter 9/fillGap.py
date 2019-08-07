@@ -2,6 +2,7 @@ import os, re, shutil
 
 src_fdr = input('Enter source folder to search from:\n')
 des_fdr = input('Enter destination folder to rename to:\n')
+# Enter the position and format of prefix, e.g. End & 001 for spam001.txt
 prefix_pos, prefix_len =input('Prefix starts at (Beginning/End) of file name?: '), str(len(input('Prefix starts with: ')))
 
 prefix_start_regex = re.compile(r'\b\d{' + prefix_len + r'}(\D+\.\w+)')  # Search prefix at beginning of file name.
