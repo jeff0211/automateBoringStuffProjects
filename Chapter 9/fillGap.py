@@ -9,16 +9,15 @@ prefix_end_regex = re.compile(r'(\w+\D)\d{' + prefix_len + r'}(\.\w+)')  # Searc
 prefix_count = 1
 list_files = []
 
-for folders, subfolders, files in os.walk(src_fdr):
-    for file in files:
-        if prefix_pos == 'Beginning':  # Find files with prefix starting & append to a list var.
-            fileObj = prefix_start_regex.search(file)
-            if fileObj != None:
-                list_files.append(file)
-        elif prefix_pos == 'End':  # Find files with prefix ending & append to a list var.
-            fileObj = prefix_end_regex.search(file)
-            if fileObj != None:
-                list_files.append(file)
+for file in os.listdir(src_fdr):
+    if prefix_pos == 'Beginning':  # Find files with prefix starting & append to a list var.
+        fileObj = prefix_start_regex.search(file)
+        if fileObj != None:
+            list_files.append(file)
+    elif prefix_pos == 'End':  # Find files with prefix ending & append to a list var.
+        fileObj = prefix_end_regex.search(file)
+        if fileObj != None:
+            list_files.append(file)
 
 for each in sorted(list_files):  # Sort the list in ascending order.
     if prefix_pos == 'Beginning':  # Rename prefix at the beginning of file name.
@@ -35,5 +34,5 @@ for each in sorted(list_files):  # Sort the list in ascending order.
             new_filename = fileObj.group(1) + new_prefix + fileObj.group(2)
             prefix_count += 1
             shutil.move(os.path.join(src_fdr, each), os.path.join(des_fdr, new_filename))
-            
+
 print('Prefixes for files are renamed in running order.')
