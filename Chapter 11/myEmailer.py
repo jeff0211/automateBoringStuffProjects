@@ -38,7 +38,7 @@ else:
     sendElem = browser.find_element_by_xpath('//*[@id="app"]/div/div[2]/div/div[1]/div[3]/div[2]/div/div[3]/div[1]/div/div/div/div[1]/div[4]/div[2]/div[1]/button[1]/div')
     sendElem.click()
     print('Your email is sent to {}.'.format(emailRecep))
-
+    browser.quit()
 
 
 
