@@ -1,23 +1,18 @@
 import requests, re, os
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 
-os.makedirs('imgDL', exist_ok=True)
-
-"""SEARCHES FOR PHOTOS ON FLICKR"""
+"""
+SEARCH FOR PHOTOS ON FLICKR & CREATING A LIST ON ALL ELEMENTS OF
+class='view photo-list-photo-view awake' WITHIN 'div' TAG
+"""
 mySearch = input('Search for: ')
-browser = webdriver.Chrome()
-browser.get('https://www.flickr.com/')
-browser.find_element_by_id('search-field').send_keys(mySearch, Keys.ENTER)
-
-"""CREATING A LIST ON ALL ELEMENTS OF class='view photo-list-photo-view awake' WITHIN 'div' TAG"""
 res = requests.get('https://www.flickr.com/search/?text=' + mySearch)
 soup = BeautifulSoup(res.text, 'lxml')
 searchElem = soup.select('div > .view.photo-list-photo-view.awake')
 print('Search completed!')
 
 """DOWNLOAD SEARCH RESULTS"""
+os.makedirs('imgDL', exist_ok=True)
 for each in range(len(searchElem)):
     imgSrc = searchElem[each].get('style')
     imgURL = 'https:' + re.search(r'\/\/.*.jpg', imgSrc).group()
@@ -26,5 +21,4 @@ for each in range(len(searchElem)):
     with open(os.path.join('imgDL', os.path.basename(imgURL)), 'wb') as imageFile:
         for chunk in res.iter_content(10000):
             imageFile.write(chunk)
-browser.close()
 print('Download Completed!')
