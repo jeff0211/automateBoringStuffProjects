@@ -1,5 +1,5 @@
 import openpyxl, sys, os
-from openpyxl.utils import get_column_letter, column_index_from_string
+from openpyxl.utils import get_column_letter
 
 n = int(sys.argv[1])
 cwd = os.chdir(input('Save to Directory: '))
