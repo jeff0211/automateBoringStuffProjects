@@ -3,7 +3,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.styles import Font
 
 n = int(sys.argv[1])
-cwd = os.chdir(input('Save to Directory: '))
+os.chdir(input('Save to Directory: '))
 wb = openpyxl.Workbook()
 sheet = wb.active
 
